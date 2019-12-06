@@ -1,0 +1,59 @@
+ public static void main(String[] args) {
+        // An array that holds the numbers in the box
+        char[] pos = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ',};
+
+        Scanner scanner = new Scanner(System.in);
+        //Declaring a input interger variable
+        int input;
+        // this is so turns can be taken between two people
+        char turn = 'X';
+        //to able to count turns to have it end in a draw
+        int currentTurn = 1;
+
+        // this is to keep the code running so you can have unlimited enterys
+        while (true) {
+            do {
+                System.out.print("Enter a position: ");
+                input = scanner.nextInt();
+                // Ask for another postion if the player chooses a space thats already been taken
+            } while (pos[input - 1] == 'X' || pos[input - 1] == 'O');
+            // the pos will put a x in the number box the player has chosen there is also a minus one so you dont go one over because its 0 to 9 instead of 1 to 9
+            pos[input - 1] = turn;
+            // each line is declaring a number for the box and joining two strings together
+            System.out.println("\n " + pos[6] + " | " + pos[7] + " | " + pos[8] + " ");
+            System.out.println("---+---+---");
+            System.out.println(" " + pos[3] + " | " + pos[4] + " | " + pos[5] + " ");
+            System.out.println("---+---+---");
+            System.out.println(" " + pos[0] + " | " + pos[1] + " | " + pos[2] + "\n ");
+             // to check the bottom row for a win, also checking the middle, top and diagonal row. It is also saying if x or o is in certain row print the print statement and end the loop
+            if (pos[0] == turn && pos[1] == turn && pos[2] == turn
+                    || pos[3] == turn && pos[4] == turn && pos[5] == turn
+                    || pos[6] == turn && pos[7] == turn && pos[8] == turn
+                    || pos[6] == turn && pos[3] == turn && pos[0] == turn
+                    || pos[7] == turn && pos[4] == turn && pos[1] == turn
+                    || pos[8] == turn && pos[5] == turn && pos[2] == turn
+                    || pos[6] == turn && pos[4] == turn && pos[2] == turn
+                    || pos[8] == turn && pos[4] == turn && pos[0] == turn){
+                   System.out.println(turn + " is the WINNER!!");
+                   break;
+            }
+
+            // if it senses X it will turn it into O
+            if (turn == 'X') {
+                // turn it into a O
+                turn = 'O';
+            }
+            // or if the turn was a O it will turn it into a X
+            else if (turn == 'O'){
+                // turn it into a X
+                turn = 'X';
+            }
+            // to record how many turns are being taken and if more than 9 it will print the Draw and break the loop
+            currentTurn++;
+            if (currentTurn > 9) {
+                System.out.println("DRAW!!");
+                break;
+            }
+        }
+    }
+}
